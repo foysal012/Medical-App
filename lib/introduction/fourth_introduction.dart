@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:doctor_hunt/authentication/signin_page_screen.dart';
+import 'package:doctor_hunt/screen/home_page_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FourthIntroduction extends StatefulWidget {
@@ -9,6 +13,30 @@ class FourthIntroduction extends StatefulWidget {
 }
 
 class _FourthIntroductionState extends State<FourthIntroduction> {
+
+    void onLogin(){
+      FirebaseAuth auth = FirebaseAuth.instance;
+
+      final user = auth.currentUser;
+
+      if(user != null){
+        Timer(Duration(seconds: 1), () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePageScreen()));
+        });
+      } else {
+        Timer(Duration(seconds: 1), () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignInPageScreen()));
+        });
+      }
+    }
+
+    @override
+  void initState() {
+    // TODO: implement initState
+      onLogin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

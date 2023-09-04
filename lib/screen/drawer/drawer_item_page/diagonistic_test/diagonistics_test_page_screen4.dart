@@ -318,7 +318,7 @@ class _DiagonisticsTestPageScreen4State extends State<DiagonisticsTestPageScreen
                   SizedBox(height: 5,),
 
                   TextFormField(
-                    controller: nameController,
+                    controller: emailController,
 
                     decoration: InputDecoration(
                         hintText: "itsmefoysal007@gmail.com",

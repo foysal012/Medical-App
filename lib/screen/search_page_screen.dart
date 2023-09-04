@@ -341,47 +341,17 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
 
                                             print("Clicked by me");
                                             setState(() {
-
-                                              var val =
-                                                  listofDentistDoctor[index].icon;
-                                              setState(() {
-                                                //isvalue = !isvalue;
-                                                if (val == isvalue) {
-                                                  // listofDentistDoctor[index]
-                                                  //     .icon = false;
-                                                  final fav = DentistDoctorModelClass(
-                                                    name: listofDentistDoctor[index].name,
-                                                    //experience: listofDentistDoctor[index].experience,
-                                                  );
-                                                  // favouritelist.add(fav);
-                                                  favouritelist.add(
-                                                      fav
-                                                  );
-                                                } else{
-                                                  favouritelist.remove(
-                                                      DentistDoctorModelClass(
-                                                        name: listofDentistDoctor[index].name,
-                                                      ));
-                                                  print(
-                                                      favouritelist.toString());
-                                                }
-                                                // else {
-                                                //   listofDentistDoctor[index]
-                                                //       .icon = true;
-                                                //   if (listofDentistDoctor[index]
-                                                //       .icon = true) {
-                                                //     //favouritelist.add(listofDentistDoctor[index]);
-                                                //
-                                                //
-                                                //   }
-                                                // }
-                                              });
-
-                                              // final fav = DentistDoctorModelClass(
-                                              //   name: listofDentistDoctor[index].name,
-                                              //   experience: listofDentistDoctor[index].experience,
-                                              // );
-                                              // favouritelist.add(fav);
+                                              final fav = DentistDoctorModelClass(
+                                                name: listofDentistDoctor[index].name,
+                                                experience: listofDentistDoctor[index].experience,
+                                                imgurl: listofDentistDoctor[index].imgurl,
+                                                patientnumber: listofDentistDoctor[index].patientnumber,
+                                                performence: listofDentistDoctor[index].performence,
+                                                isavailable: listofDentistDoctor[index].isavailable,
+                                                icon: listofDentistDoctor[index].icon,
+                                                position: listofDentistDoctor[index].position,
+                                              );
+                                              favouritelist.add(fav);
                                             });
 
                                           },

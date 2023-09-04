@@ -49,11 +49,11 @@ class _FirstIntroductionState extends State<FirstIntroduction> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 100,
-              width: 100,
+              height: 150,
+              width: 150,
               decoration: BoxDecoration(
-                //image: DecorationImage(image: AssetImage("images/logo.png")),
-                color: Colors.pink
+                image: DecorationImage(image: AssetImage("images/w15.png"),fit: BoxFit.cover),
+                //color: Colors.pink
               ),
             ),
 

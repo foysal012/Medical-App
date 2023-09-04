@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/authentication/signin_page_screen.dart';
 import 'package:doctor_hunt/bottom_navigationbar/bottom_navigationbar_screen.dart';
+import 'package:doctor_hunt/firebase_options.dart';
 import 'package:doctor_hunt/introduction/first_introduction.dart';
 import 'package:doctor_hunt/introduction/fourth_introduction.dart';
 import 'package:doctor_hunt/introduction/second_introduction.dart';
@@ -15,9 +16,16 @@ import 'package:doctor_hunt/screen/favourite_doctor_page_screen.dart';
 import 'package:doctor_hunt/screen/home_page_screen.dart';
 import 'package:doctor_hunt/screen/profile/profile_page_screen1.dart';
 import 'package:doctor_hunt/screen/search_page_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
+
   runApp(const MyApp());
 }
 

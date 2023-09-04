@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>568047181976-2vvdr9snn66s4am0t0l37icq7n8ihdcl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.568047181976-2vvdr9snn66s4am0t0l37icq7n8ihdcl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>568047181976-jthq0aeeo1kcp996u5e25a8kh3f0n071.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXohVdJFfgsrnvEqGZmXmJlJrliV1zFDg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>568047181976</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.doctorHunt</string>
+	<key>PROJECT_ID</key>
+	<string>first-time-setup</string>
+	<key>STORAGE_BUCKET</key>
+	<string>first-time-setup.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:568047181976:ios:66fbaeaf5728a03249f0ed</string>
+	<key>DATABASE_URL</key>
+	<string>https://first-time-setup-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

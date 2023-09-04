@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/authentication/signin_page_screen.dart';
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/diagonistic_test/diagonistic_test_page_screen2.dart';
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/help_center_page_screen.dart';
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/medical%20record/medical_record_page_screen.dart';
@@ -6,6 +7,8 @@ import 'package:doctor_hunt/screen/drawer/drawer_item_page/my_doctor_page_screen
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/payment/payment_page_screen.dart';
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/privacy_policy_page_screen.dart';
 import 'package:doctor_hunt/screen/drawer/drawer_item_page/settings_page_screen.dart';
+import 'package:doctor_hunt/screen/home_page_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -16,6 +19,11 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -99,7 +107,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 )
             ),
 
-            SizedBox(height: 10,),
+            //SizedBox(height: 10,),
 
             Expanded(
                 flex: 8,
@@ -190,6 +198,35 @@ class _MyDrawerState extends State<MyDrawer> {
                         },
                         icon1: Icons.settings,
                         title: "Settings",
+                        icon2: Icons.arrow_forward_ios,
+                      ),
+
+                      //SizedBox(height: 10,),
+
+                      DrawerItem(
+                        onTap: (){
+
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          _auth.signOut().then((value){
+                            setState(() {
+                              isLoading = false;
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sucessfully Logout")));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignInPageScreen()));
+                          }).onError((error, stackTrace){
+                            setState(() {
+                              isLoading = false;
+                            });
+                            toastMessage(error.toString());
+                          });
+
+                          //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SettingsPageScreen()));
+                        },
+                        icon1: Icons.logout,
+                        title: "Logout",
                         icon2: Icons.arrow_forward_ios,
                       ),
 

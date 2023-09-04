@@ -10,6 +10,7 @@ import 'package:doctor_hunt/screen/drawer/drawer_page_screen.dart';
 import 'package:doctor_hunt/screen/live%20doctor/live_doctor_details_screen.dart';
 import 'package:doctor_hunt/screen/profile/profile_page_screen1.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -498,4 +499,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
       ),
     );
   }
+}
+
+toastMessage(String? toast){
+  Fluttertoast.showToast(
+      msg: "$toast",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
 }

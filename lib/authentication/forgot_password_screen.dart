@@ -1,3 +1,5 @@
+import 'package:doctor_hunt/screen/home_page_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -10,6 +12,10 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
 
   TextEditingController emailController = TextEditingController();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +110,24 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
           InkWell(
             onTap: (){
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("rest password link sent successfully...")));
-              Navigator.of(context).pop();
+              //Navigator.of(context).pop();
+              setState(() {
+                isLoading = true;
+              });
+
+              _auth.sendPasswordResetEmail(
+                  email: emailController.text.toString()
+              ).then((value) {
+                setState(() {
+                  isLoading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("rest password link sent successfully...")));
+              }).onError((error, stackTrace) {
+                setState(() {
+                  isLoading = false;
+                });
+                toastMessage(error.toString());
+              });
             },
             child: Container(
               height: 60,
@@ -115,7 +137,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 borderRadius: BorderRadius.circular(15),
 
               ),
-              child: Center(
+              child: isLoading == true ? CircularProgressIndicator() :
+              Center(
                 child: Text("Reset password",
                   style: TextStyle(
                     fontSize: 16,

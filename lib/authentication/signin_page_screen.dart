@@ -1,6 +1,8 @@
 import 'package:doctor_hunt/authentication/forgot_password_screen.dart';
 import 'package:doctor_hunt/authentication/signup_page_screen.dart';
 import 'package:doctor_hunt/bottom_navigationbar/bottom_navigationbar_screen.dart';
+import 'package:doctor_hunt/screen/home_page_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignInPageScreen extends StatefulWidget {
@@ -14,6 +16,10 @@ class _SignInPageScreenState extends State<SignInPageScreen> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool isLoading = false;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool isObsecure = true;
 
@@ -31,7 +37,6 @@ class _SignInPageScreenState extends State<SignInPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
         height: double.infinity,
         width: double.infinity,
 
@@ -126,7 +131,7 @@ class _SignInPageScreenState extends State<SignInPageScreen> {
                 suffixIcon: IconButton(
                   onPressed: (){
                     setState(() {
-                      
+
                     });
                   },
                   icon: Icon(Icons.turn_slight_right_outlined,
@@ -202,7 +207,26 @@ class _SignInPageScreenState extends State<SignInPageScreen> {
 
             InkWell(
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> BottomNavigationBarScreen()));
+                //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> BottomNavigationBarScreen()));
+
+                setState(() {
+                  isLoading = true;
+                });
+                _auth.signInWithEmailAndPassword(
+                    email: emailController.text.toString(),
+                    password: passwordController.text.toString(),
+                ).then((value) {
+                  setState(() {
+                    isLoading = false;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Login")));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> BottomNavigationBarScreen()));
+                }).onError((error, stackTrace) {
+                  setState(() {
+                    isLoading = false;
+                  });
+                  toastMessage("$error");
+                });
               },
               child: Container(
                 height: 60,
@@ -212,13 +236,14 @@ class _SignInPageScreenState extends State<SignInPageScreen> {
                   borderRadius: BorderRadius.circular(15),
 
                 ),
-                child: Center(
+                child: isLoading == true ? CircularProgressIndicator() :
+                Center(
                   child: Text("Login",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),

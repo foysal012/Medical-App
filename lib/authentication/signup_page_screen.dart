@@ -1,4 +1,6 @@
 import 'package:doctor_hunt/authentication/signin_page_screen.dart';
+import 'package:doctor_hunt/screen/home_page_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPageScreen extends StatefulWidget {
@@ -17,6 +19,10 @@ class _SignUpPageScreenState extends State<SignUpPageScreen> {
   bool isObsecure = true;
 
   bool termcondition = false;
+
+  bool isLoading = false;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +255,27 @@ class _SignUpPageScreenState extends State<SignUpPageScreen> {
 
             InkWell(
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignInPageScreen()));
+                setState(() {
+                  isLoading =true;
+                });
+                print("${nameController.text.toString()}");
+                print("${emailController.text.toString()}");
+                print("${passwordController.text.toString()}");
+                _auth.createUserWithEmailAndPassword(
+                    email: emailController.text.toString(),
+                    password: passwordController.text.toString(),
+                ).then((value){
+                  setState(() {
+                    isLoading = false;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Registered")));
+                }).onError((error, stackTrace) {
+                  setState(() {
+                    isLoading = false;
+                  });
+                  toastMessage(error.toString());
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignInPageScreen()));
+                });
               },
               child: Container(
                 height: 60,
@@ -259,7 +285,8 @@ class _SignUpPageScreenState extends State<SignUpPageScreen> {
                   borderRadius: BorderRadius.circular(15),
 
                 ),
-                child: Center(
+                child: isLoading == true ? CircularProgressIndicator() :
+                Center(
                   child: Text("Sign up",
                     style: TextStyle(
                       fontSize: 16,

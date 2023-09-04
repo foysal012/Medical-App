@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/model/category/dentist_doctor_model_class.dart';
+import 'package:doctor_hunt/screen/booking/booking_doctor_page1.dart';
 import 'package:doctor_hunt/screen/search_page_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -115,19 +116,118 @@ class _FavouriteDoctorPageScreenState extends State<FavouriteDoctorPageScreen> {
                       margin: EdgeInsets.only(
                         bottom: 20,
                       ),
+
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        top: 20,
+                        right: 10,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
                         children: [
-                          // Container(
-                          //   child: ,
-                          // ),
-                          
-                          //Text("${favouritelist[index].}")
 
-                          Text("${widget.favouritelist![index].name}"),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(image: NetworkImage("${widget.favouritelist![index].imgurl}"),fit: BoxFit.cover),
+                                ),
+                              ),
+
+                              SizedBox(
+                                width: 10,
+                              ),
+
+                              Column(
+                                children: [
+                                  Text("${widget.favouritelist![index].name}",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+
+                                  Text("${widget.favouritelist![index].position}",
+                                  style: TextStyle(
+                                    color: Colors.green
+                                  ),
+                                  ),
+
+                                  Text("${widget.favouritelist![index].experience}",
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+
+                                  Row(
+                                    children: [
+                                      Text("${widget.favouritelist![index].performence}",
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                      Text("${widget.favouritelist![index].patientnumber}",
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              )
+                            ],
+                          ),
+
+                          SizedBox(height: 5,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Text("Next Available",
+                               style: TextStyle(
+                                 color: Colors.black54,
+                                 fontWeight: FontWeight.w300,
+                               ),
+                              ),
+
+                              InkWell(
+                                onTap: (){
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> BookingDoctorPage1()));
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+
+                                  child: Center(
+                                    child: Text("Book Now",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
                         ],
                       ),
                     );

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class ProfilePageScreen1 extends StatefulWidget {
@@ -14,6 +17,19 @@ class _ProfilePageScreen1State extends State<ProfilePageScreen1> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+
+  XFile? chooseImage;
+  ImagePicker _picker = ImagePicker();
+
+  uploadImageFromCamera() async{
+
+    chooseImage = await _picker.pickImage(source: ImageSource.camera);
+  }
+
+  uploadImageFromGalary() async{
+
+    chooseImage = await _picker.pickImage(source: ImageSource.gallery);
+  }
 
 
   @override
@@ -109,6 +125,7 @@ class _ProfilePageScreen1State extends State<ProfilePageScreen1> {
                             //color: Colors.grey,
                             image: DecorationImage(image: NetworkImage("https://pbs.twimg.com/profile_images/1605607703178403840/hvbe8OEE_400x400.jpg")),
                           ),
+                          //child: Image.network("${chooseImage == null ?  NetworkImage("https://pbs.twimg.com/profile_images/1605607703178403840/hvbe8OEE_400x400.jpg") : Image.file(File(chooseImage!.path))}"),
                         ),
 
                         Positioned(
@@ -121,7 +138,12 @@ class _ProfilePageScreen1State extends State<ProfilePageScreen1> {
                                 shape: BoxShape.circle,
                                 color: Colors.black45,
                               ),
-                              child: Icon(Icons.camera_alt, color: Colors.white,size: 16,),
+                              child: IconButton(
+                                onPressed: (){ 
+                                  uploadImageFromCamera();
+                                },
+                                icon: Icon(Icons.camera_alt, color: Colors.white,size: 16,),
+                              ),
                             ))
                       ],
                     ),

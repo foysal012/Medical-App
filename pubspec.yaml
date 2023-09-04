@@ -40,6 +40,11 @@ dependencies:
   shared_preferences: ^2.2.0
   image_picker: ^0.8.4+4
   file_picker: ^4.0.0
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
+  firebase_storage: ^11.2.6
+  cloud_firestore: ^4.9.1
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:
